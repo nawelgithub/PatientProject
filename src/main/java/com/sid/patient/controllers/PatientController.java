@@ -1,5 +1,7 @@
 package com.sid.patient.controllers;
 
+import javax.validation.Valid;
+
 //import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sid.patient.entities.Patient;
@@ -38,6 +42,19 @@ public class PatientController {
 
 		patientRepository.deleteById(id);
 		return "redirect:/patients?page=" + page + "&size=" + size + "&keyword=" + keyword;
+	}
+	
+	@GetMapping(path="/formPatient")
+	public String formPatient(Model model) {
+		model.addAttribute("patient",new Patient());
+		return "formPatient";
+	}
+	
+	@PostMapping("/savePatient")
+	public String savePatient(@Valid Patient patient, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {return "formPatient";} 
+		patientRepository.save(patient);
+		return "formPatient";
 	}
 
 }
