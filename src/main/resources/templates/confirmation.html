@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="template1">
+
+<head>
+	<meta charset="utf-8">
+	<title>Form Patient</title>
+</head>
+
+<body>
+	<div layout:fragment="pageContent">
+		<div class="container">
+			<div class="card">
+				<div class="card-header" align="center"><h5>Enregistrement effectué avec succès</h5></div>
+				<div class="card-body">
+
+					<div class="form-group">
+						<strong><label>ID:</label></strong>
+						<label th:text=${patient.id}></label>
+					</div>
+					<div class="form-group">
+						<strong><label>Name:</label></strong>
+						<label th:text=${patient.name}></label>
+					</div>
+					
+					<div class="form-group">
+						<strong><label>Score:</label></strong>
+						<label th:text=${patient.score}></label>
+					</div>
+					
+					<div class="form-group">
+						<strong><label>Date Naissance:</label></strong>
+						<label th:text=${patient.dateNaissance}></label>
+					</div>
+					
+					<div class="form-group">
+						<strong><label>Malade:</label></strong>
+						<label th:text=${patient.malade}></label>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

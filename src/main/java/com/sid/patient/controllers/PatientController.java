@@ -47,14 +47,24 @@ public class PatientController {
 	@GetMapping(path="/formPatient")
 	public String formPatient(Model model) {
 		model.addAttribute("patient",new Patient());
+		model.addAttribute("mode", "new");
 		return "formPatient";
 	}
 	
 	@PostMapping("/savePatient")
-	public String savePatient(@Valid Patient patient, BindingResult bindingResult) {
+	public String savePatient(@Valid Patient patient, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {return "formPatient";} 
 		patientRepository.save(patient);
-		return "formPatient";
+		model.addAttribute("patient",patient);
+		return "confirmation";
+	}
+	
+	@GetMapping(path="/editPatient")
+	public String editPatient(Long id,Model model) {
+		Patient p=patientRepository.findById(id).get();
+		model.addAttribute("patient", p);
+		model.addAttribute("mode", "edit");
+		return"formPatient";
 	}
 
 }

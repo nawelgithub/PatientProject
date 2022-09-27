@@ -37,6 +37,7 @@
 									<th>Malade</th>
 									<th>Score</th>
 									<th>Delete</th>
+									<th>Edit</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -50,6 +51,9 @@
 									<td><a onclick="javascript:return confirm('Etes vous sur de vouloir supprimer?')"
 											class="btn btn-danger"
 											th:href="@{deletePatient?(id=${p.id},keyword=${keyword},page=${currentPage},size=${size})}">Delete</a>
+									</td>
+									<td>
+									<a  class="btn btn-success" th:href="@{editPatient(id=${p.id})}">Edit</a>
 									</td>
 
 
