@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
- xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 	<meta charset="utf-8">
@@ -32,20 +31,26 @@
 					Patients
 				</a>
 				<div class="dropdown-menu">
-					<a  sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{formPatient}">Ajouter</a>
+					<a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" th:href="@{formPatient}">Ajouter</a>
 					<a class="dropdown-item" href="#">Chercher</a>
 				</div>
 			</li>
 		</ul>
-		<ul class="navbar-nav ml-auto">	
+		<ul class="navbar-nav ml-auto">
 			<!-- Dropdown -->
 			<li class="nav-item dropdown ">
 				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-					<span  sec:authentication="name"></span>
+					<span sec:authorize="isAuthenticated()">
+						<span sec:authentication="name"></span>
+					</span>
+					<span sec:authorize="!isAuthenticated()">
+						<span>s'identifier</span>
+					</span>
+
 				</a>
 				<div class="dropdown-menu">
-					<a sec:authorize="!isAuthenticated()" class="dropdown-item" href="#">Login</a>
-					<a class="dropdown-item" th:href="@{logout}">Logout</a>
+					<a sec:authorize="isAnonymous()" class="dropdown-item" th:href="@{login}">Login</a>
+					<a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Logout</a>
 					<a class="dropdown-item" href="#">Profile</a>
 				</div>
 			</li>
